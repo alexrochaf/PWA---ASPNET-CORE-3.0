@@ -1,11 +1,18 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PWApp.Models;
+using System.Linq;
 
 namespace PWApp.Controllers
 {
     public class SuperHeroiController : Controller
     {
+        private readonly HeroisContext context;
+
+        public SuperHeroiController(HeroisContext context)
+        {
+            this.context = context;
+        }
         // GET: SuperHeroi
         public ActionResult Index()
         {
@@ -15,12 +22,14 @@ namespace PWApp.Controllers
         // GET: SuperHeroi/Details/5
         public ActionResult Detalhes(int id)
         {
-            return View();
+            var superHeroi = context.SuperHeroi.FirstOrDefault(x => x.Id == id);
+            return View(superHeroi);
         }
 
         // GET: SuperHeroi/Create
         public ActionResult Criar()
         {
+            
             return View();
         }
 

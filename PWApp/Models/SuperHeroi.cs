@@ -9,14 +9,6 @@ namespace PWApp.Models
         {
         }
 
-        public SuperHeroi(int? id, string nome, string superPoder, string foto)
-        {
-            Id = id ?? 0;
-            Nome = nome;
-            SuperPoder = superPoder;
-            Foto = foto;
-        }
-
         [ScaffoldColumn(false)]
         public int Id { get; set; }
 
@@ -28,5 +20,6 @@ namespace PWApp.Models
 
         [Display(Name = "Foto")]
         public string Foto { get; set; }
+
     }
 }
