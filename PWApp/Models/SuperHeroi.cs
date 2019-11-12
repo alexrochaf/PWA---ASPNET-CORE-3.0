@@ -5,16 +5,8 @@ namespace PWApp.Models
 {
     public class SuperHeroi
     {
-        protected SuperHeroi()
+        public SuperHeroi()
         {
-        }
-
-        public SuperHeroi(int? id, string nome, string superPoder, IFormFile foto)
-        {
-            Id = id ?? 0;
-            Nome = nome;
-            SuperPoder = superPoder;
-            Foto = foto;
         }
 
         [ScaffoldColumn(false)]
@@ -27,16 +19,7 @@ namespace PWApp.Models
         public string SuperPoder { get; set; }
 
         [Display(Name = "Foto")]
-        public IFormFile Foto { get; set; }
-
-        [ScaffoldColumn(false)]
-        public string FileName { get; set; }
-
-        [ScaffoldColumn(false)]
-        public string ContentType { get; set; }
-
-        [ScaffoldColumn(false)]
-        public byte[] Imagem { get; set; }
+        public string Foto { get; set; }
 
     }
 }
