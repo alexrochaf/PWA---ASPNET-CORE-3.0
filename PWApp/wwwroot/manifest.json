@@ -1,0 +1,17 @@
+{
+    "name": "PWA Heróis",
+    "short_name": "PWA",
+    "description": "Criado em ASP.NET Core 3.0",
+    "icons": [
+      {
+        "src": "/images/L_096.png",
+        "sizes": "192x192"
+      },
+      {
+        "src": "/images/L_096.png",
+        "sizes": "512x512"
+      }
+    ],
+    "display": "standalone",
+    "start_url": "/"
+  }
