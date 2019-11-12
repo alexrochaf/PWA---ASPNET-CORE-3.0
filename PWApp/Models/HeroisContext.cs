@@ -11,5 +11,11 @@ namespace PWApp.Models
         }
 
         public DbSet<SuperHeroi> SuperHeroi { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+               builder.Entity<SuperHeroi>().HasKey(m => m.Id);
+               base.OnModelCreating(builder);
+        }
     }
 }

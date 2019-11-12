@@ -24,7 +24,11 @@ namespace PWApp
             services.AddControllersWithViews();
             services.AddProgressiveWebApp();
 
-            services.AddDbContext<HeroisContext>(options => options.UseSqlite(Configuration.GetConnectionString("HeroisContext")));
+            var connection = Configuration["ConexaoSqlite:SqliteConnectionString"];
+
+            services.AddDbContext<HeroisContext>(options => options.UseSqlite(connection));
+
+            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
