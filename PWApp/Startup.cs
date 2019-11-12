@@ -25,7 +25,7 @@ namespace PWApp
             services.AddControllersWithViews();
             services.AddProgressiveWebApp();
 
-            var connection = "Data Source=" + AppDomain.CurrentDomain.GetData("DataDirectory") + "Herois.db";
+            var connection = "Data Source=" + AppDomain.CurrentDomain.GetData("DataDirectory") + "wwwroot/App_Data/Herois.db";
 
             services.AddDbContext<HeroisContext>(options => options.UseSqlite(connection));
 
