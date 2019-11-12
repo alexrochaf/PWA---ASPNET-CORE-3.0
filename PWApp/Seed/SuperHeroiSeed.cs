@@ -24,7 +24,7 @@ namespace PWApp.Seed
                         Id = 1,
                         Nome = "Batman",
                         SuperPoder = "Grana",
-                        Foto = "/images/b.png"
+                        Foto = "/images/b.jpg"
                     },
                     new SuperHeroi{
                         Id = 2,

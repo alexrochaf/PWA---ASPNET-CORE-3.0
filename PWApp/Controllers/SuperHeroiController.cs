@@ -14,9 +14,10 @@ namespace PWApp.Controllers
             this.context = context;
         }
         // GET: SuperHeroi
-        public ActionResult Index()
+        public ActionResult Index(string busca = "")
         {
-            return View();
+            var superHerois = context.SuperHeroi.Where(x => x.Nome.Contains(busca.ToLower()) || x.SuperPoder.Contains(busca.ToLower())).Take(10);
+            return View(superHerois);
         }
 
         // GET: SuperHeroi/Details/5
