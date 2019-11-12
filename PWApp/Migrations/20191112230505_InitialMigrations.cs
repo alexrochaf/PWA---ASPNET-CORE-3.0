@@ -2,7 +2,7 @@
 
 namespace PWApp.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class InitialMigrations : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -20,6 +20,16 @@ namespace PWApp.Migrations
                 {
                     table.PrimaryKey("PK_SuperHeroi", x => x.Id);
                 });
+
+            migrationBuilder.InsertData(
+                table: "SuperHeroi",
+                columns: new[] { "Id", "Foto", "Nome", "SuperPoder" },
+                values: new object[] { 1, "/images/b.jpg", "Batman", "Grana" });
+
+            migrationBuilder.InsertData(
+                table: "SuperHeroi",
+                columns: new[] { "Id", "Foto", "Nome", "SuperPoder" },
+                values: new object[] { 2, "/images/m.jpg", "Miranha", "Soltar Teia" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
