@@ -1,3 +1,4 @@
+using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -24,7 +25,7 @@ namespace PWApp
             services.AddControllersWithViews();
             services.AddProgressiveWebApp();
 
-            var connection = Configuration["ConexaoSqlite:SqliteConnectionString"];
+            var connection = "Data Source=" + AppDomain.CurrentDomain.GetData("DataDirectory") + "Herois.db";
 
             services.AddDbContext<HeroisContext>(options => options.UseSqlite(connection));
 
