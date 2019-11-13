@@ -1,3 +1,4 @@
+using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -24,11 +25,7 @@ namespace PWApp
             services.AddControllersWithViews();
             services.AddProgressiveWebApp();
 
-            var connection = Configuration["ConexaoSqlite:SqliteConnectionString"];
-
-            services.AddDbContext<HeroisContext>(options => options.UseSqlite(connection));
-
-            services.AddMvc();
+            services.AddDbContext<HeroisContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -8,8 +8,8 @@ using PWApp.Models;
 namespace PWApp.Migrations
 {
     [DbContext(typeof(HeroisContext))]
-    [Migration("20191112030034_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20191112230505_InitialMigrations")]
+    partial class InitialMigrations
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -37,6 +37,22 @@ namespace PWApp.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("SuperHeroi");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Foto = "/images/b.jpg",
+                            Nome = "Batman",
+                            SuperPoder = "Grana"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Foto = "/images/m.jpg",
+                            Nome = "Miranha",
+                            SuperPoder = "Soltar Teia"
+                        });
                 });
 #pragma warning restore 612, 618
         }
