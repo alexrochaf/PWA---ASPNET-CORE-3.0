@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PWApp.Models;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -12,7 +11,8 @@ namespace PWApp.Controllers
     public class SuperHeroiController : Controller
     {
         private readonly HeroisContext context;
-        IWebHostEnvironment webHostEnvironment;
+        private readonly IWebHostEnvironment webHostEnvironment;
+
 
         public SuperHeroiController(HeroisContext context, IWebHostEnvironment webHostEnvironment)
         {
@@ -45,25 +45,17 @@ namespace PWApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Criar(SuperHeroi superHeroi, IFormFile file)
         {
+            string pasta = "images";
+
+            var nomeArquivo = GetUniqueFileName(file.FileName);
+            var uploads = Path.Combine(webHostEnvironment.WebRootPath, pasta);
+            var filePath = Path.Combine(uploads, nomeArquivo);
 
             FileInfo fi = new FileInfo(file.FileName);
 
-            string extensaoArquivo = fi.Extension;
-
-            string nomeArquivo = Guid.NewGuid().ToString();
-
-            nomeArquivo += extensaoArquivo;
-
             string caminhoWebRoot = webHostEnvironment.WebRootPath;
 
-            string pasta = "images";
-
-            string caminhoDestinoArquivo = caminhoWebRoot + $@"\{pasta}\{nomeArquivo}";
-
-            using (var stream = new FileStream(caminhoDestinoArquivo, FileMode.Create))
-            {
-                file.CopyTo(stream);
-            }
+            file.CopyTo(new FileStream(filePath, FileMode.Create));
 
             superHeroi.AdicionarFoto(pasta, nomeArquivo);
 
@@ -72,6 +64,15 @@ namespace PWApp.Controllers
 
             return RedirectToAction(nameof(Index));
 
+        }
+
+        private string GetUniqueFileName(string fileName)
+        {
+            fileName = Path.GetFileName(fileName);
+            return Path.GetFileNameWithoutExtension(fileName)
+                      + "_"
+                      + Guid.NewGuid().ToString().Substring(0, 4)
+                      + Path.GetExtension(fileName);
         }
 
         // GET: SuperHeroi/Edit/5
