@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
-<div class="bg_load"></div>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
@@ -36,6 +35,18 @@
         </main>
     </div>
 
+    <div class="bg_load"></div>
+<div class="wrapper">
+    <div class="inner">
+        <span>L</span>
+        <span>o</span>
+        <span>a</span>
+        <span>d</span>
+        <span>i</span>
+        <span>n</span>
+        <span>g</span>
+    </div>
+</div>
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2019 - PWApp - <a asp-area="" asp-controller="Home" asp-action="Sobre">Semana Acadêmica</a>
@@ -45,15 +56,10 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script>
-          $(function() {
-          $('#loading-bg').hide();
-          $('#loading-image').hide();
-
-          $(window).on('beforeunload', function() {
-            $('#loading-bg').show();
-            $('#loading-image').show();
-          });
-        });
+        $(window).load(function() {
+            $(".bg_load").fadeOut("slow");
+            $(".wrapper").fadeOut("slow");
+        })
     </script>
     @RenderSection("Scripts", required: false)
 </body>
