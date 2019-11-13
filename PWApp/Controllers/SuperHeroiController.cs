@@ -55,7 +55,7 @@ namespace PWApp.Controllers
 
                 nomeArquivo += extensaoArquivo;
 
-                string caminhoWebRoot = webHostEnvironment.WebRootPath;
+                string caminhoWebRoot = "D:\\home\\site\\";
 
                 string pasta = "images";
 
