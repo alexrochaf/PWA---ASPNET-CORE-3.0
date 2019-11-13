@@ -54,7 +54,8 @@ namespace PWApp
             app.UseStaticFiles(new StaticFileOptions
             {
                 FileProvider = new PhysicalFileProvider(
-                    Path.Combine(@"D:\home\site", "Uploads")),
+                    FileProvider = new PhysicalFileProvider(@"D:\home\site\Uploads"),
+                ),
                 RequestPath = "/Uploads"
             });
 
