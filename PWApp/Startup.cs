@@ -6,7 +6,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
-using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Hosting;using
+Microsoft.Extensions.Options;
 using Microsoft.Extensions.Options;
 using PWApp.Models;
 
@@ -53,9 +54,7 @@ namespace PWApp
 
             app.UseStaticFiles(new StaticFileOptions
             {
-                FileProvider = new PhysicalFileProvider(
-                    FileProvider = new PhysicalFileProvider(@"D:\home\site\Uploads"),
-                ),
+                FileProvider = new PhysicalFileProvider(@"D:\home\site\Uploads"),
                 RequestPath = "/Uploads"
             });
 
