@@ -57,7 +57,7 @@ namespace PWApp.Controllers
 
             file.CopyTo(new FileStream(filePath, FileMode.Create));
 
-            superHeroi.AdicionarFoto(pasta, nomeArquivo);
+            superHeroi.AdicionarFoto(filePath);
 
             context.SuperHeroi.Add(superHeroi);
             context.SaveChanges();
