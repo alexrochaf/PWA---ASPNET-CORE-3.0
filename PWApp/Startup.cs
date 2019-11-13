@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using PWApp.Models;
+using SignalRChat.Hubs;
 
 namespace PWApp
 {
@@ -24,6 +25,7 @@ namespace PWApp
         {
             services.AddControllersWithViews();
             services.AddProgressiveWebApp();
+            services.AddSignalR();
 
             services.AddDbContext<HeroisContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
         }
@@ -54,6 +56,8 @@ namespace PWApp
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                    
+                endpoints.MapHub<ChatHub>("/chatHub");
             });
         }
     }
