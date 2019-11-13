@@ -55,7 +55,7 @@ namespace PWApp.Controllers
 
                 nomeArquivo += extensaoArquivo;
 
-                string caminhoWebRoot = Server.MapPath("~/images");
+                string caminhoWebRoot = Path.GetTempFileName();
 
                 string pasta = "images";
 
