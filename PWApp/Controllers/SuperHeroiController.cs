@@ -36,7 +36,7 @@ namespace PWApp.Controllers
         // GET: SuperHeroi/Create
         public ActionResult Criar()
         {
-            
+
             return View();
         }
 
@@ -45,38 +45,33 @@ namespace PWApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Criar(SuperHeroi superHeroi, IFormFile file)
         {
-            try
+
+            FileInfo fi = new FileInfo(file.FileName);
+
+            string extensaoArquivo = fi.Extension;
+
+            string nomeArquivo = Guid.NewGuid().ToString();
+
+            nomeArquivo += extensaoArquivo;
+
+            string caminhoWebRoot = webHostEnvironment.WebRootPath;
+
+            string pasta = "images";
+
+            string caminhoDestinoArquivo = caminhoWebRoot + $@"\{pasta}\{nomeArquivo}";
+
+            using (var stream = new FileStream(caminhoDestinoArquivo, FileMode.Create))
             {
-                FileInfo fi = new FileInfo(file.FileName);
-
-                string extensaoArquivo = fi.Extension;
-
-                string nomeArquivo = Guid.NewGuid().ToString();
-
-                nomeArquivo += extensaoArquivo;
-
-                string caminhoWebRoot = Path.GetTempFileName();
-
-                string pasta = "images";
-
-                string caminhoDestinoArquivo = caminhoWebRoot + "\\" + pasta + "\\" + nomeArquivo;
-
-                using (var stream = new FileStream(caminhoDestinoArquivo, FileMode.Create))
-                {
-                    file.CopyTo(stream);
-                }
-
-                superHeroi.AdicionarFoto(pasta, nomeArquivo);
-
-                context.SuperHeroi.Add(superHeroi);
-                context.SaveChanges();
-
-                return RedirectToAction(nameof(Index));
+                file.CopyTo(stream);
             }
-            catch (Exception ex)
-            {
-                return View();
-            }
+
+            superHeroi.AdicionarFoto(pasta, nomeArquivo);
+
+            context.SuperHeroi.Add(superHeroi);
+            context.SaveChanges();
+
+            return RedirectToAction(nameof(Index));
+
         }
 
         // GET: SuperHeroi/Edit/5
