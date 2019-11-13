@@ -22,9 +22,9 @@ namespace PWApp.Models
         [Display(Name = "Foto")]
         public string Foto { get; set; }
 
-        public void AdicionarFoto(string pasta)
+        public void AdicionarFoto(string name)
         {
-            this.Foto = $"/Uploads/{pasta}";
+            this.Foto = $"/Uploads/imgages{name}";
         }
     }
 }
