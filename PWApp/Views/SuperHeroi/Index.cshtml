@@ -3,48 +3,59 @@
 @{
     ViewData["Title"] = "Index";
 }
-
-<div class="col-md-12">
-    <div class="container">
-        <a asp-action="Criar" class="btn btn-outline-success float-right">Novo</a>
-    </div>
-    <table class="table mt-2">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Foto)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Nome)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.SuperPoder)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        <img src="@item.Foto" class="img-rounded" height="45" width="45"/>
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Nome)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.SuperPoder)
-                    </td>
-                    <td>
-                        <div class="float-right">
-                            <a asp-action="Editar" asp-route-id="@item.Id" class="btn btn-outline-primary">Editar</a>
-                            <a asp-action="Detalhes" asp-route-id="@item.Id" class="btn btn-outline-info">Detalhes</a>
-                            <a asp-action="Deletar" asp-route-id="@item.Id" class="btn btn-outline-danger">Deletar</a>
-                        </div>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+<div class="row">
+    @if (Model.Any())
+    {
+        <div class="col-md-12">
+            <a asp-action="Criar" class="btn btn-outline-success float-right">Novo</a>
+            <table class="table mt-2">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Foto)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Nome)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.SuperPoder)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <div class="img-cropped-list">
+                                    <img src="@item.Foto" class="img-rounded"/>
+                                </div>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Nome)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SuperPoder)
+                            </td>
+                            <td>
+                                <form method="post" asp-action="Deletar" class="float-right row">
+                                    <a asp-action="Detalhes" asp-route-id="@item.Id" class="btn btn-outline-info mr-2">Detalhes</a>
+                                    <button type="submit" asp-action="Deletar" asp-route-id="@item.Id" class="btn btn-outline-danger">Deletar</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="container-fluid jumbotron">
+            <h1>¯\_(⊙_ʖ⊙)_/¯</h1>
+            <h2>Nenhum Super-Herói cadastrado (╥_╥)</h2>
+            <a asp-action="Criar" class="btn btn-success mt-2">Novo Herói</a>
+        </div>
+    }
 </div>
