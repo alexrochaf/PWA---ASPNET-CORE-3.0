@@ -1,4 +1,3 @@
-using System;
 using System.IO;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -7,7 +6,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Options;
 using PWApp.Models;
 
 namespace PWApp
@@ -55,8 +53,7 @@ namespace PWApp
 
             app.UseStaticFiles(new StaticFileOptions
             {
-                FileProvider = new PhysicalFileProvider(
-                    Path.Combine(Directory.GetCurrentDirectory(), "Uploads")),
+                FileProvider = new PhysicalFileProvider(@"D:\home\site\Uploads"),
                 RequestPath = "/Uploads"
             });
 

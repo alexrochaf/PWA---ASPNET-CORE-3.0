@@ -24,7 +24,7 @@ namespace PWApp.Models
 
         public void AdicionarFoto(string pasta)
         {
-            this.Foto = $"~/Uploads{pasta}";
+            this.Foto = $"/Uploads/{pasta}";
         }
     }
 }
