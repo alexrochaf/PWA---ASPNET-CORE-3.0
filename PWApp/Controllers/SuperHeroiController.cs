@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PWApp.Models;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -12,7 +11,8 @@ namespace PWApp.Controllers
     public class SuperHeroiController : Controller
     {
         private readonly HeroisContext context;
-        IWebHostEnvironment webHostEnvironment;
+        private readonly IWebHostEnvironment webHostEnvironment;
+
 
         public SuperHeroiController(HeroisContext context, IWebHostEnvironment webHostEnvironment)
         {
@@ -45,7 +45,6 @@ namespace PWApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Criar(SuperHeroi superHeroi, IFormFile file)
         {
-
             string pasta = "images";
 
             var nomeArquivo = GetUniqueFileName(file.FileName);
@@ -53,10 +52,6 @@ namespace PWApp.Controllers
             var filePath = Path.Combine(uploads, nomeArquivo);
 
             FileInfo fi = new FileInfo(file.FileName);
-
-            string extensaoArquivo = fi.Extension;
-
-            nomeArquivo += extensaoArquivo;
 
             string caminhoWebRoot = webHostEnvironment.WebRootPath;
 
@@ -69,6 +64,15 @@ namespace PWApp.Controllers
 
             return RedirectToAction(nameof(Index));
 
+        }
+
+        private string GetUniqueFileName(string fileName)
+        {
+            fileName = Path.GetFileName(fileName);
+            return Path.GetFileNameWithoutExtension(fileName)
+                      + "_"
+                      + Guid.NewGuid().ToString().Substring(0, 4)
+                      + Path.GetExtension(fileName);
         }
 
         // GET: SuperHeroi/Edit/5
