@@ -46,24 +46,21 @@ namespace PWApp.Controllers
         public ActionResult Criar(SuperHeroi superHeroi, IFormFile file)
         {
 
+            string pasta = "images";
+
+            var nomeArquivo = GetUniqueFileName(file.FileName);
+            var uploads = Path.Combine(webHostEnvironment.WebRootPath, pasta);
+            var filePath = Path.Combine(uploads, nomeArquivo);
+
             FileInfo fi = new FileInfo(file.FileName);
 
             string extensaoArquivo = fi.Extension;
-
-            string nomeArquivo = Guid.NewGuid().ToString();
 
             nomeArquivo += extensaoArquivo;
 
             string caminhoWebRoot = webHostEnvironment.WebRootPath;
 
-            string pasta = "images";
-
-            string caminhoDestinoArquivo = caminhoWebRoot + $@"\{pasta}\{nomeArquivo}";
-
-            using (var stream = new FileStream(caminhoDestinoArquivo, FileMode.Create))
-            {
-                file.CopyTo(stream);
-            }
+            file.CopyTo(new FileStream(filePath, FileMode.Create));
 
             superHeroi.AdicionarFoto(pasta, nomeArquivo);
 
