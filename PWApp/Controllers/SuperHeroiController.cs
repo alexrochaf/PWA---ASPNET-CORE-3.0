@@ -48,7 +48,7 @@ namespace PWApp.Controllers
             string pasta = "images";
 
             var nomeArquivo = GetUniqueFileName(file.FileName);
-            var uploads = Path.Combine(webHostEnvironment.WebRootPath, pasta);
+            var uploads = Path.Combine(@"D:\home\site", pasta);
             var filePath = Path.Combine(uploads, nomeArquivo);
 
             FileInfo fi = new FileInfo(file.FileName);
