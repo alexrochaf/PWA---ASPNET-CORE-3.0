@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -35,31 +35,24 @@
         </main>
     </div>
 
-    <div class="bg_load"></div>
-<div class="wrapper">
-    <div class="inner">
-        <span>L</span>
-        <span>o</span>
-        <span>a</span>
-        <span>d</span>
-        <span>i</span>
-        <span>n</span>
-        <span>g</span>
-    </div>
-</div>
+    <div class="modal"></div>
+
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2019 - PWApp - <a asp-area="" asp-controller="Home" asp-action="Sobre">Semana Acadêmica</a>
         </div>
     </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script>
-        $(window).load(function() {
-            $(".bg_load").fadeOut("slow");
-            $(".wrapper").fadeOut("slow");
-        })
+        $body = $("body");
+
+        $(document).on({
+            ajaxStart: function () { $body.addClass("loading"); },
+            ajaxStop: function () { $body.removeClass("loading"); }
+        });
     </script>
     @RenderSection("Scripts", required: false)
 </body>
