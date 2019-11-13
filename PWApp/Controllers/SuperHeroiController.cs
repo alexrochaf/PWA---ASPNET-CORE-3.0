@@ -1,6 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PWApp.Models;
+using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace PWApp.Controllers
@@ -8,10 +12,12 @@ namespace PWApp.Controllers
     public class SuperHeroiController : Controller
     {
         private readonly HeroisContext context;
+        IWebHostEnvironment webHostEnvironment;
 
-        public SuperHeroiController(HeroisContext context)
+        public SuperHeroiController(HeroisContext context, IWebHostEnvironment webHostEnvironment)
         {
             this.context = context;
+            this.webHostEnvironment = webHostEnvironment;
         }
         // GET: SuperHeroi
         public ActionResult Index(string busca = "")
@@ -37,15 +43,37 @@ namespace PWApp.Controllers
         // POST: SuperHeroi/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Criar(IFormCollection collection)
+        public ActionResult Criar(SuperHeroi superHeroi, IFormFile file)
         {
             try
             {
-                // TODO: Add insert logic here
+                FileInfo fi = new FileInfo(file.FileName);
+
+                string extensaoArquivo = fi.Extension;
+
+                string nomeArquivo = Guid.NewGuid().ToString();
+
+                nomeArquivo += extensaoArquivo;
+
+                string caminhoWebRoot = webHostEnvironment.WebRootPath;
+
+                string pasta = "images";
+
+                string caminhoDestinoArquivo = caminhoWebRoot + "\\" + pasta + "\\" + nomeArquivo;
+
+                using (var stream = new FileStream(caminhoDestinoArquivo, FileMode.Create))
+                {
+                    file.CopyTo(stream);
+                }
+
+                superHeroi.AdicionarFoto(pasta, nomeArquivo);
+
+                context.SuperHeroi.Add(superHeroi);
+                context.SaveChanges();
 
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception ex)
             {
                 return View();
             }

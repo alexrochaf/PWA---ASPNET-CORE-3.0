@@ -1,17 +1,14 @@
 ﻿@model PWApp.Models.SuperHeroi
 
 @{
-    ViewData["Title"] = "Criar";
+    ViewData["Title"] = "Criar novo Super-Herói";
 }
 
-<h1>Criar</h1>
-
-<h4>SuperHeroi</h4>
-<hr />
-<div class="row">
+<h2>@ViewData["Title"]</h2>
+<div class="row mt-2">
     <div class="col-md-4">
-        <form asp-action="Criar">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <form asp-action="Criar" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger" ></div>
             <div class="form-group">
                 <label asp-for="Nome" class="control-label"></label>
                 <input asp-for="Nome" class="form-control" />
@@ -24,18 +21,19 @@
             </div>
             <div class="form-group">
                 <label asp-for="Foto" class="control-label"></label>
-                <input asp-for="Foto" type="file" />
+                <input asp-for="Foto" type="file" name="file"/>
                 <span asp-validation-for="Foto" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-outline-secondary">Cancelar</a>
+                <input type="submit" value="Criar" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    
 </div>
 
 @section Scripts {
