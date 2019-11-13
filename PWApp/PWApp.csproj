@@ -24,4 +24,9 @@
     <PackageReference Include="WebEssentials.AspNetCore.PWA" Version="1.0.59" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <Folder Include="Uploads\images\" />
+  </ItemGroup>
+
 </Project>
