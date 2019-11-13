@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace PWApp.Models
@@ -21,5 +22,9 @@ namespace PWApp.Models
         [Display(Name = "Foto")]
         public string Foto { get; set; }
 
+        public void AdicionarFoto(string pasta, string nomeArquivo)
+        {
+            this.Foto = $"/{pasta}/{nomeArquivo}";
+        }
     }
 }
