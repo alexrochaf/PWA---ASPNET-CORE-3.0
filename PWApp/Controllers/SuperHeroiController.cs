@@ -102,20 +102,15 @@ namespace PWApp.Controllers
             }
         }
 
-        // GET: SuperHeroi/Delete/5
-        public ActionResult Deletar(int id)
-        {
-            return View();
-        }
-
-        // POST: SuperHeroi/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Deletar(int id, IFormCollection collection)
+        public ActionResult Deletar(int id)
         {
             try
             {
-                // TODO: Add delete logic here
+                var superHeroi = context.SuperHeroi.FirstOrDefault(x => x.Id == id);
+                context.SuperHeroi.Remove(superHeroi);
+                context.SaveChanges();
 
                 return RedirectToAction(nameof(Index));
             }
